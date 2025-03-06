@@ -1,7 +1,7 @@
 ## mazemouse
 
 ### guide
-1. install python 3.8.x
+1. install python 3.8.x using [site](https://www.python.org/) or [brew](https://brew.sh/) or apt/yum/dnf and etc.
 2. create virtual environment
 ```
 # MacOS/Linux
