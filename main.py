@@ -1,32 +1,50 @@
+# main.py
+import pygame
 import settings
-from maze import Maze
-from tasks import tasks
-from tasks.tasks import greetings
-from ui import events
-from ui import graphics
+from maze.Maze import Maze  # Импорт класса
+from ui import events, graphics
 
-FPS = 60
-running = True
-clock = events.Clock()
+def main():
+    pygame.init()
+    clock = events.Clock()
+    FPS = 60
+    
+    screen = pygame.display.set_mode(settings.window_size)
+    pygame.display.set_caption("Maze Mouse")
+    clock = pygame.time.Clock()
+    
+    maze_width = settings.window_size[0] // settings.tile_size[0]
+    maze_height = settings.window_size[1] // settings.tile_size[1]
+    maze = Maze(maze_width, maze_height)
 
-# Приветствие. Его нужно удалить
-greetings()
+    running = True
+    while running:
+        delta_time = clock.tick(FPS) / 1000.0
 
-while running:
-    for event in events.get_event_queue():
-        if tasks.handle_event(event):
-            continue
-        if event.type == events.QUIT:
-           running = False
-        if event.type == events.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                Maze.add_mouse(event.pos[0], event.pos[1])
+        # Обработка событий
+        for event in events.get_event_queue():
+            if event.type == events.QUIT:
+                running = False
+            elif event.type == events.MOUSEBUTTONDOWN and event.button == 1:
+                screen_x, screen_y = event.pos
+                maze_x = (screen_x - settings.view_left_top[0]) / settings.tile_size[0]
+                maze_y = (screen_y - settings.view_left_top[1]) / settings.tile_size[1]
+                maze.add_mouse(maze_x, maze_y)  # Вызов метода экземпляра
+            elif event.type == events.MOUSEBUTTONDOWN:
+                if event.button == 3:  # Правая кнопка
+                    screen_x, screen_y = event.pos
+                    maze_x = (screen_x - settings.view_left_top[0]) / settings.tile_size[0]
+                    maze_y = (screen_y - settings.view_left_top[1]) / settings.tile_size[1]
+                    maze.add_cheese(maze_x, maze_y)  # Будет только один сыр
 
-    graphics.fill("black")
-    # рисуем лабиринт
-    Maze.draw()
-    tasks.check_tasks()
-    graphics.flip()
-    clock.tick(FPS)
-    # обновляем весь лабиринт
-    Maze.update(1 / FPS)
+        # Обновление и отрисовка
+        maze.update(delta_time)
+        screen.fill((0, 0, 0))
+        maze.draw()
+        pygame.display.flip()
+        clock.tick(60)
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()

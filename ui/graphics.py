@@ -16,15 +16,15 @@ def load_image(path, size=(1, 1)):
     img = pygame.image.load(path)
     return pygame.transform.scale(img, (size[0] * settings.tile_size[0], size[1] * settings.tile_size[1]))
 
-
-# клиенты будут передавать координаты лабиринта
 def draw_image(image, x, y):
-    """Здесь нужен pygame blit с пересчетом на settings.tile_size"""
-    pass
+    """Отрисовка изображения с учетом смещения и размера тайлов"""
+    screen_x = int(x * settings.tile_size[0] + settings.view_left_top[0])
+    screen_y = int(y * settings.tile_size[1] + settings.view_left_top[1])
+    screen.blit(image, (screen_x, screen_y))
 
-
-# клиенты будут передавать координаты лабиринта
 def draw_circle(color, x, y, r):
-    """Здесь нужен pygame draw.circle с пересчетом на settings.tile_size"""
-    pass
-
+    """Отрисовка окружности с учетом масштабирования"""
+    screen_x = int(x * settings.tile_size[0] + settings.view_left_top[0])
+    screen_y = int(y * settings.tile_size[1] + settings.view_left_top[1])
+    radius = int(r * settings.tile_size[0])
+    pygame.draw.circle(screen, color, (screen_x, screen_y), radius)
