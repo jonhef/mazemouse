@@ -1,6 +1,32 @@
-## MazeMouse
+## mazemouse
 
-### maze
+### guide
+1. install python 3.8.x
+2. create virtual environment
+```
+# MacOS/Linux
+python3 -m venv .venv
+source .venv/bin/activate
+# Windows
+python -m venv .venv
+.venv\Scripts\activate
+```
+3. install dependencies
+```
+# MacOS/Linux
+pip3 install -r requirements.txt
+# Windows
+pip install -r requirements.txt
+```
+4. run using python
+```
+# MacOS/Linux
+python3 main.py
+# Windows 
+python main.py
+```
+
+#### maze
 `maze/cheese.py`
 - `class Cheese` – class for cheese(now using as a way to draw with function `draw`)
 
@@ -46,7 +72,7 @@
 - `class Wall_tile(Tile) : Tile` – class for wall tiles
 - `class Room_tile(Tile) : Tile` – class for room tiles
 
-### ui
+#### ui
 `ui/events.py` - module for some defines
 `ui/graphics.py` - module for drawing
 - `fill(color: str)` – fills screen with color
@@ -54,10 +80,10 @@
 - `draw_image(image: pygame.Surface, x: float, y: float)` – draws image
 - `draw_circle(color: str, x: float, y: float, r: float)` – draws circle
 
-### main.py
+#### main.py
 - `main()` – main function
 
-### settings.py
+#### settings.py
 - `tile_size: tuple[int, int]` – size of tile in terms of width and height
 - `view_left_top: tuple[int, int]` – margin of view(left and top)
 - `window_size: tuple[int, int]` – size of window in terms of width and height
