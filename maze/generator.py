@@ -32,8 +32,8 @@ class MazeGenerator:
                 walls += MazeGenerator._get_neighbor_walls(wx, wy, maze)
         
         # Устанавливаем вход и выход
-        maze[1][0] = path_char
-        maze[height-2][width-1] = path_char
+        # maze[1][0] = path_char
+        # maze[height-2][width-1] = path_char
         
         return maze
 

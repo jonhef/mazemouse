@@ -13,8 +13,8 @@ def main():
     pygame.display.set_caption("Maze Mouse")
     clock = pygame.time.Clock()
     
-    maze_width = settings.window_size[0] // settings.tile_size[0]
-    maze_height = settings.window_size[1] // settings.tile_size[1]
+    maze_width = settings.width
+    maze_height = settings.height
     maze = Maze(maze_width, maze_height)
 
     running = True
